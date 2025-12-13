@@ -12,15 +12,15 @@ graph LR
     end
     subgraph docs[Replicable Data]
       subgraph env[Environment Management]
-        wtools[App Management]
+        wam[App Management]
         wpt[OS Management]
       end
       subgraph prv[Private Data]
         bak[Service Backups]
         share[Synced Data]
       end
-      wf[Workflow Data]
       pub[Published Data]
+      wf[Workflow Data]
       lib[External Data]
     end
   end
@@ -31,24 +31,24 @@ graph LR
   pub -.->|upload| cloud
   cloud -.->|download| bak & lib
   env & wf & share <-.->|sync| cloud
-  wtools --> apps
+  wam --> apps
   wpt --> sys & os
 
-  classDef finalized fill:#c7f7d9,stroke:#8fd8a4;
-  classDef current fill:#c7e0fa,stroke:#89b4e9;
-  classDef external fill:#f5f0d9,stroke:#d8d0a4;
-  classDef private fill:#f1dcf9,stroke:#d2a9eb;
-  classDef appsrv fill:#cfe2f3,stroke:#9fc5e8
-  classDef device fill:#ead1dc,stroke:#d5a6bd
+  classDef finalized fill:#d9ead3,stroke:#b6d7a8;
+  classDef current fill:#c9daf8,stroke:#a4c2f4;
+  classDef external fill:#d9d2e9,stroke:#b4a7d6;
+  classDef private fill:#ead1dc,stroke:#d5a6bd;
+  classDef service fill:#cfe2f3,stroke:#9fc5e8;
+  classDef device fill:#f4cccc,stroke:#ea9999;
 
   class pub finalized
-  class wtools,wpt,wf current
+  class wam,wpt,wf current
   class bak,share private
   class lib external
-  class cloud appsrv
+  class cloud service
   class removable device
 
-  click wtools "https://github.com/konskarz/wtools"
+  click wam "https://github.com/konskarz/wam"
   click wpt "https://github.com/konskarz/wpt"
 ```
 

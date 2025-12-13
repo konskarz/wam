@@ -1,10 +1,10 @@
-# wTools
+# Windows Application Manager
 
-wTools is an INI-driven Windows application manager, written in NSIS 2, designed for automating system provisioning, tool deployment, and building reproducible development environments. For preparing Windows see [Windows Provisioning Toolkit](https://github.com/konskarz/wpt).
+WAM is an INI-driven NSIS 2 toolkit for building reproducible, portable workflows, automating application deployment and launching. For preparing Windows see [Windows Provisioning Toolkit](https://github.com/konskarz/wpt).
 
 ## Getting Started
 
-- Download wTools from the [releases page](https://github.com/konskarz/wtools/releases).
+- Download WAM from the [releases page](https://github.com/konskarz/wam/releases).
 - Run any executable. On first launch, it automatically generates an INI file in the same folder. Each INI contains inline documentation describing all properties and options: [sai.ini](resources/sai.ini), [pai.ini](resources/pai.ini), [pal.ini](resources/pal.ini).
 - Edit the INI to configure applications to install or launch, define download URLs or offline sources, adjust paths, environment variables, and runtime behavior.
 - Use anywhere. Each tool is fully self-contained – just the executable and its INI.
@@ -14,7 +14,7 @@ wTools is an INI-driven Windows application manager, written in NSIS 2, designed
 ### Shared
 
 - Support basic command-line options for controlling installer/launcher behavior.
-- Recognize system and wTools-specific environment variables for portable paths and commands.
+- Recognize system and WAM-specific environment variables for portable paths and commands.
 - Can run silently or interactively.
 - NSIS-based interface for app lists and live logging.
 
@@ -50,7 +50,7 @@ wTools is an INI-driven Windows application manager, written in NSIS 2, designed
 
 ## Interface
 
-While wTools is designed to run silently for automated provisioning and deployment, each tool also provides a simple NSIS-based interface for interactive use and live logging, which can help troubleshoot INI configuration or app behavior. Selection: PAI and SAI allow multi-select, PAL – single-select.
+While WAM is designed to run silently, each tool also provides a simple NSIS-based interface for interactive use and live logging, which can help troubleshoot INI configuration or app behavior. Selection: PAI and SAI allow multi-select, PAL – single-select.
 
 ### Components
 
@@ -99,7 +99,7 @@ graph LR
     subgraph Cloud
         remotes([Remote binaries])
     end
-    subgraph wTools
+    subgraph WAM
         pal{{PAL: runtime shim}}
         pai{{PAI: package manager}}
         sai{{SAI: system provisioner}}
@@ -121,7 +121,7 @@ graph LR
 
 ```mermaid
 graph LR
-    subgraph wTools
+    subgraph WAM
         launcher{{Launcher}}
         pal{{PAL: runtime shim}}
     end
@@ -164,9 +164,9 @@ graph LR
 
 - Projects are stored locally and version-controlled via Remote VCS.
 - Local Sync coordinates local directories and Cloud Storage.
-- Editor accesses Projects and the wTools folder for editing and running applications.
+- Editor accesses Projects and the WAM folder for editing and running applications.
 
-> For a conceptual overview of how wTools fits into a reproducible computing workflow, see the [Personal Computing Method](pcm.md).
+> For a conceptual overview of how WAM fits into a reproducible computing workflow, see the [Personal Computing Method](pcm.md).
 
 ## Advantages
 
