@@ -34,12 +34,12 @@ graph LR
   wam --> apps
   wpt --> sys & os
 
-  classDef finalized fill:#d9ead3,stroke:#b6d7a8;
-  classDef current fill:#c9daf8,stroke:#a4c2f4;
-  classDef external fill:#d9d2e9,stroke:#b4a7d6;
-  classDef private fill:#ead1dc,stroke:#d5a6bd;
-  classDef service fill:#cfe2f3,stroke:#9fc5e8;
-  classDef device fill:#f4cccc,stroke:#ea9999;
+  classDef finalized fill:#d9ead3,stroke:#b6d7a8,color:#333;
+  classDef current fill:#c9daf8,stroke:#a4c2f4,color:#333;
+  classDef external fill:#d9d2e9,stroke:#b4a7d6,color:#333;
+  classDef private fill:#ead1dc,stroke:#d5a6bd,color:#333;
+  classDef service fill:#cfe2f3,stroke:#9fc5e8,color:#333;
+  classDef device fill:#f4cccc,stroke:#ea9999,color:#333;
 
   class pub finalized
   class wam,wpt,wf current
