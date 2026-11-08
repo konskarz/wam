@@ -180,3 +180,4 @@ graph LR
 - Developed between 2010–2015.
 - Inspired by [portableapps.com](https://portableapps.com/) (first release 2004).
 - Predates [WinGet](https://github.com/microsoft/winget-cli) (first release 2020).
+- Predates [Scoop](https://github.com/ScoopInstaller/Scoop) (first release 2022).
