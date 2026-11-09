@@ -2,7 +2,7 @@
 Var IST	; installer section text, same as INI section name in SelectMgr.nsh
 Var TRG	; main program executable to launch
 Var ARG	; command line arguments for main program executable
-Var PTH	; string to append to %PATH% environment variable
+Var PTH	; string to prepend to %PATH% environment variable
 Var ENV	; list of environment variables to set separated by $DLM
 Var LFL	; list of local files to monitor (backup, remove, restore) separated by $DLM
 Var LDL	; list of local directories to monitor (backup, remove, restore) separated by $DLM
@@ -47,7 +47,7 @@ Function SetPath
 	Push $0								; buffer
 	Push $1								; path
 	ReadEnvStr $1 "PATH"
-	StrCpy $1 "$1$PTH;"
+	StrCpy $1 "$PTH;$1"
 	System::Call 'KERNEL32::SetEnvironmentVariable(t "PATH", t "$1")i.r2'
 	StrCmp $0 0 0 +2
 		DetailPrint "Error setting PATH variable"
