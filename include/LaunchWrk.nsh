@@ -48,7 +48,7 @@ Function SetPath
 	Push $1								; path
 	ReadEnvStr $1 "PATH"
 	StrCpy $1 "$PTH;$1"
-	System::Call 'KERNEL32::SetEnvironmentVariable(t "PATH", t "$1")i.r2'
+	System::Call 'KERNEL32::SetEnvironmentVariable(t "PATH", t "$1")i.r0'
 	StrCmp $0 0 0 +2
 		DetailPrint "Error setting PATH variable"
 	Pop $1
@@ -64,7 +64,7 @@ Function SetEnv			; $3 = statement, WordFunc.nsh required
 	StrCmp "'$2'" "''" Done
 		IfFileExists "$2" +2
 			CreateDirectory "$2"
-		System::Call 'KERNEL32::SetEnvironmentVariable(t "$1", t "$2")i.r2'
+		System::Call 'KERNEL32::SetEnvironmentVariable(t "$1", t "$2")i.r0'
 		StrCmp $0 0 0 Done
 			DetailPrint "Error setting $1 variable"
 	Done:
