@@ -110,7 +110,7 @@ Function "LocateDrive"
 	IfErrors Done
 		StrCmp "'$LOC'" "''" +2
 			IfFileExists "$LOC$R9" Defined		; use last location
-				StrCpy $0 "$LOCALAPPDATA\$R9"			; assign default value
+				StrCpy $0 "${DID}"			; assign default value
 				${GetDrives} "ALL" "CheckPath"	; FileFunc.nsh required
 				StrCmp "'$LOC'" "''" Done		; keep default value
 			Defined:
