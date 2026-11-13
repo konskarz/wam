@@ -1,4 +1,4 @@
-!define DID "$TEMP"					; default installation directory
+!define DID "$LOCALAPPDATA\konskarz.wam" ; default installation directory
 !define DDD "$DOCUMENTS\Downloads"	; default downloads directory
 ; General Attributes
 Name "${INSTNAME}"
@@ -110,7 +110,7 @@ Function "LocateDrive"
 	IfErrors Done
 		StrCmp "'$LOC'" "''" +2
 			IfFileExists "$LOC$R9" Defined		; use last location
-				StrCpy $0 "$TEMP\$R9"			; assign default value
+				StrCpy $0 "$LOCALAPPDATA\$R9"			; assign default value
 				${GetDrives} "ALL" "CheckPath"	; FileFunc.nsh required
 				StrCmp "'$LOC'" "''" Done		; keep default value
 			Defined:
