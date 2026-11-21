@@ -76,23 +76,23 @@ Photos and videos created by users, increasingly captured on smartphones, repres
 ```mermaid
 graph LR
   subgraph C["Windows Profile (C:)"]
-    CD["Documents"]
-    CO["OneDrive"]
-    CL["Downloads"]
-    CP["Pictures"]
-    CM["Music"]
-    CV["Videos"]
+    CD[Documents]
+    CO[OneDrive]
+    CL[Downloads]
+    CP[Pictures]
+    CM[Music]
+    CV[Videos]
   end
   subgraph D["Data Volume (D:)"]
-    subgraph docs["Documents"]
+    subgraph docs[Documents]
       share["OneDrive – Personal"]
       wf["OneDrive - [OrganizationName]"]
-      pic["Pictures"]
-      lib["Library"]
+      pic[Pictures]
+      lib[Library]
     end
-    subgraph depot["Downloads"]
-      DM["Music"]
-      DV["Video"]
+    subgraph depot[Downloads]
+      DM[Music]
+      DV[Video]
     end
   end
   cloud([Cloud])
@@ -145,39 +145,60 @@ Let's return to PortableApps.com Platform, and this time take a look at its [Por
 Today, if we favor open-source software, many Windows applications will either be portable by design or can be made portable with relatively little effort through scripting. The problem lies in the sheer variety of things that need to be configured, and, more importantly, in distinguishing actual user settings from internal application data. Scripting, combined with storing application settings in the portion of user data selected for replication, remains a sensible strategy. This results in a management environment consisting of scripts and executable files from WAM and WPT projects, together with user configuration data. Occupying a few megabytes of disk space, it provides the automation needed to deploy the operating system and manage software that may occupy tens of gigabytes once downloaded and deployed.
 
 ```mermaid
-graph RL
-  subgraph data[User Data]
-    subgraph depot[Unreplicated Data]
-      apps[App Components]
-      sys[OS Components]
-    end
-    subgraph docs[Replicated Data]
-      subgraph env[Environment Management]
-        wam[App Management]
-        wpt[OS Management]
+graph LR
+  subgraph home[Home PC]
+    subgraph HD["Data Volume (D:)"]
+      subgraph depot[Downloads]
+        apps[App Components]
+        sys[OS Components]
       end
-      wf[Workflow Data]
+      subgraph docs[Documents]
+        subgraph HO["OneDrive - [OrganizationName]"]
+          wf[Projects]
+          subgraph env[Environment Management]
+            wam[App Management]
+            wpt[OS Management]
+          end
+        end
+      end
+    end
+    os["Windows Volume (C:)"]
+    removable[[Removable Media]]
+  end
+  subgraph work[Work PC]
+    subgraph WC["Windows Profile (C:)"]
+      subgraph wdepot[AppData\Local\konskarz.wam]
+        wapps[App Components]
+      end
+      subgraph WO["OneDrive\OneDrive - [OrganizationName]"]
+        wwf[Projects]
+        subgraph wenv[Environment Management]
+          wwam[App Management]
+          wwpt[OS Management]
+        end
+      end
     end
   end
-  os[OS]
   cloud([Cloud])
-  removable[[Removable Media]]
 
-  removable <-.->|sync| docs
-  cloud <-.->|sync| env & wf
+  docs <-.->|sync| removable
+  cloud  <-.->|sync| WO & HO
   wam --> apps
-  wpt --> sys & os
+  wpt --> os & sys
+  wwam --> wapps
 
   classDef current fill:#c9daf8,stroke:#a4c2f4,color:#333;
   classDef service fill:#cfe2f3,stroke:#9fc5e8,color:#333;
   classDef device fill:#f4cccc,stroke:#ea9999,color:#333;
 
-  class wam,wpt,wf current
+  class wam,wpt,wf,wwam,wwpt,wwf current
   class cloud service
   class removable device
 
   click wam "https://github.com/konskarz/wam"
   click wpt "https://github.com/konskarz/wpt"
+  click wwam "https://github.com/konskarz/wam"
+  click wwpt "https://github.com/konskarz/wpt"
 ```
 
 - **App Management**: separate app management, used for portability, automation, and workspace integration to enable reproducible workflows across devices, and synchronize it via services to keep it editable across devices
