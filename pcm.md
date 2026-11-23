@@ -17,11 +17,11 @@ Offline replication also makes it possible to use a replica to transfer data bet
 ```mermaid
 graph RL
   subgraph data[User Data]
-    subgraph depot[Unreplicated Data]
+    subgraph dl[Unreplicated Data]
       apps[App Components]
       sys[OS Components]
     end
-    subgraph docs[Replicated Data]
+    subgraph doc[Replicated Data]
       subgraph prv[Private Data]
         bak[Service Backups]
         share[Synced Data]
@@ -34,9 +34,9 @@ graph RL
   cloud([Cloud])
   removable[[Removable Media]]
 
-  removable <-.->|sync| docs
+  removable <-.->|sync| doc
   cloud <-.->|sync| share & wf
-  cloud -.->|download| depot & bak & lib
+  cloud -.->|download| dl & bak & lib
 
   classDef private fill:#ead1dc,stroke:#d5a6bd,color:#333;
   classDef current fill:#c9daf8,stroke:#a4c2f4,color:#333;
@@ -84,30 +84,30 @@ graph LR
     CV[Videos]
   end
   subgraph D["Data Volume (D:)"]
-    subgraph docs[Documents]
+    subgraph doc[Documents]
       share["OneDrive – Personal"]
       wf["OneDrive - [OrganizationName]"]
       pic[Pictures]
       lib[Library]
     end
-    subgraph depot[Downloads]
-      DM[Music]
-      DV[Video]
+    subgraph dl[Downloads]
+      mus[Music]
+      vid[Video]
     end
   end
   cloud([Cloud])
   removable[[Removable Media]]
 
-  CD -->|relocate| docs
-  CO -->|relocate| docs
-  CL -->|relocate| depot
+  CD -->|relocate| doc
+  CO -->|relocate| doc
+  CL -->|relocate| dl
   CP -->|relocate| pic
-  CM -->|relocate| DM
-  CV -->|relocate| DV
-  depot -->|keep| lib
+  CM -->|relocate| mus
+  CV -->|relocate| vid
+  dl -->|keep| lib
   share <-.->|sync| cloud
   wf <-.->|sync| cloud
-  docs <-.->|sync| removable
+  doc <-.->|sync| removable
 
   classDef external fill:#d9d2e9,stroke:#b4a7d6,color:#333;
   classDef private fill:#ead1dc,stroke:#d5a6bd,color:#333;
@@ -148,13 +148,13 @@ Today, if we favor open-source software, many Windows applications will either b
 graph LR
   subgraph home[Home PC]
     subgraph HD["Data Volume (D:)"]
-      subgraph depot[Downloads]
+      subgraph dl[Downloads]
         apps[App Components]
         sys[OS Components]
       end
-      subgraph docs[Documents]
+      subgraph doc[Documents]
         subgraph HO["OneDrive - [OrganizationName]"]
-          wf[Projects]
+          proj[Projects]
           subgraph env[Environment Management]
             wam[App Management]
             wpt[OS Management]
@@ -167,11 +167,11 @@ graph LR
   end
   subgraph work[Work PC]
     subgraph WC["Windows Profile (C:)"]
-      subgraph wdepot[AppData\Local\konskarz.wam]
+      subgraph wdl[AppData\Local\konskarz.wam]
         wapps[App Components]
       end
       subgraph WO["OneDrive\OneDrive - [OrganizationName]"]
-        wwf[Projects]
+        wproj[Projects]
         subgraph wenv[Environment Management]
           wwam[App Management]
           wwpt[OS Management]
@@ -181,7 +181,7 @@ graph LR
   end
   cloud([Cloud])
 
-  docs <-.->|sync| removable
+  doc <-.->|sync| removable
   cloud  <-.->|sync| WO & HO
   wam --> apps
   wpt --> os & sys
@@ -191,7 +191,7 @@ graph LR
   classDef service fill:#cfe2f3,stroke:#9fc5e8,color:#333;
   classDef device fill:#f4cccc,stroke:#ea9999,color:#333;
 
-  class wam,wpt,wf,wwam,wwpt,wwf current
+  class wam,wpt,proj,wwam,wwpt,wproj current
   class cloud service
   class removable device
 
